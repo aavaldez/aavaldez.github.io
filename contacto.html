@@ -8,13 +8,70 @@
     <link rel="stylesheet" href="assets/css/estilos.css">
   </head>
   <body>
-    <form onsubmit="return validar()" id="frm">
-      <label for="nombre">Nombre</label>
-      <input type="text" name="nombre"/>
-      <label for="mensaje">Mensaje</label>
-      <textarea type="text" name="nombre"></textarea>
-      <button type="submit"></button>
-    </form>
-	<script src="assets/js/index.js"></script>
+    <div class="bg-container">
+      <div class="logo">
+        <img src="./assets/imgs/logo.png" alt="Mriya">
+      </div>
+            
+      <div class="cards">
+        <div class="card">
+          <h2>Contactanos y contanos que accesorios te gustaria adquirir</h2>
+          <p>Si preferís que el contacto sea por Whatsapp dejá tu celular.</p>
+          <form onsubmit="return validar()">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" />
+            <label for="correo">Correo electrónico</label>
+            <input type="text" name="correo" id="correo" />
+            <label for="celular">Celular (Opcional)</label>
+            <input type="text" name="celular" id="celular" />
+            <label for="mensaje">Mensaje</label>
+            <textarea type="text" name="mensaje" id="mensaje" cols="50" rows="10">Hola Mriya, estoy interesada en algunos de tus accesorios!</textarea>
+            <input type="submit" value="Consultar">
+          </form>
+        </div>
+        <div class="card">
+          <ul id="errores"></ul>
+        </div>
+        <div class="card">
+          <ul id="mensajes"></ul>
+        </div>
+      </div>
+    </div>
+	<script>
+    function validar(){
+      let sinError = true;
+      let nombre = document.getElementById("nombre");
+      let correo = document.getElementById("correo");
+      let mensaje = document.getElementById("mensaje");
+      let ltaErrores = document.getElementById("errores");
+      let ltaMensajes = document.getElementById("mensajes");
+      ltaErrores.innerHTML = "";
+      nombre.classList.remove("error");
+      correo.classList.remove("error");
+      mensaje.classList.remove("error");
+      if (nombre.value.trim()==""){
+          let item = document.createElement("li");
+          ltaErrores.appendChild(item);
+          item.innerHTML = "Nombre invalido";
+          nombre.classList.add("error");
+          sinError = false;
+      }
+      if (mensaje.value.trim()=="" || mensaje.value.length > 100){
+          let item = document.createElement("li");
+          ltaErrores.appendChild(item);
+          item.innerHTML = "Mensaje invalido";
+          nombre.classList.add("error");
+          sinError = false;
+      }
+      if(sinError){
+          let item = document.createElement("li");
+          ltaMensajes.appendChild(item);
+          item.innerHTML = nombre.value+" <b>dice: </>"+mensaje.value;
+          mensaje.value = "";
+          mensaje.focus();
+      }
+      return false;
+    }
+  </script>
   </body>
 </html>

@@ -1,36 +1,3 @@
-function validar(){
-  let sinError = true;
-  let nombre = document.getElementById("nombre");
-  let mensaje = document.getElementById("mensaje");
-  let ltaErrores = document.getElementById("errores");
-  let ltaMensajes = document.getElementById("mensajes");
-  ltaErrores.innerHTML = "";
-  nombre.classList.remove("error");
-  mensaje.classList.remove("error");
-  if (nombre.value.trim()==""){
-      let item = document.createElement("li");
-      ltaErrores.appendChild(item);
-      item.innerHTML = "Nombre invalido";
-      nombre.classList.add("error");
-      sinError = false;
-  }
-  if (mensaje.value.trim()=="" || mensaje.value.length > 100){
-      let item = document.createElement("li");
-      ltaErrores.appendChild(item);
-      item.innerHTML = "Mensaje invalido";
-      nombre.classList.add("error");
-      sinError = false;
-  }
-  if(sinError){
-      let item = document.createElement("li");
-      ltaMensajes.appendChild(item);
-      item.innerHTML = nombre.value+" <b>dice: </>"+mensaje.value;
-      mensaje.value = "";
-      mensaje.focus();
-  }
-  return false;
-}
-
 var elementoActual = 0;
 const data = [
   {
@@ -57,7 +24,7 @@ const data = [
 ];
 
 let flecha_izquierda = document.querySelector("#car-izquierda");
-flecha_izquierda.addEventListener("click", mover_izquierda);
+if(flecha_izquierda)flecha_izquierda.addEventListener("click", mover_izquierda);
 function mover_izquierda() {
   elementoActual = elementoActual==0?data.length-1:elementoActual-1;
   document.getElementById("car-titulo").innerHTML = data[elementoActual].titulo;
@@ -66,7 +33,7 @@ function mover_izquierda() {
 }
 
 let flecha_derecha = document.querySelector("#car-derecha");
-flecha_derecha.addEventListener("click", mover_derecha);
+if(flecha_derecha)flecha_derecha.addEventListener("click", mover_derecha);
 function mover_derecha() {
   elementoActual++;
   elementoActual = elementoActual % data.length;;
