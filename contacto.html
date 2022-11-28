@@ -9,69 +9,104 @@
   </head>
   <body>
     <div class="bg-container">
-      <div class="logo">
-        <img src="./assets/imgs/logo.png" alt="Mriya">
+
+      <div class="page-header">
+        <div class="logo">
+          <a href="./index.html"><img src="./assets/imgs/logo.png" alt="Mriya"></a>
+        </div>
+        <div class="menu-container">
+          <ul class="menu">
+            <li><a href="./frutal.html">Colección frutal 2022</a></li>
+            <li><a href="./formas.html">Colección formas 2023</a></li>
+            <li><a href="./contacto.html">Contactanos</a></li>
+          </ul>
+        </div>
       </div>
-            
-      <div class="cards">
-        <div class="card">
+
+      <div class="page-body">
+        <div id="form" class="form-container">
           <h2>Contactanos y contanos que accesorios te gustaria adquirir</h2>
           <p>Si preferís que el contacto sea por Whatsapp dejá tu celular.</p>
-          <form onsubmit="return validar()">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" />
-            <label for="correo">Correo electrónico</label>
-            <input type="text" name="correo" id="correo" />
-            <label for="celular">Celular (Opcional)</label>
-            <input type="text" name="celular" id="celular" />
-            <label for="mensaje">Mensaje</label>
-            <textarea type="text" name="mensaje" id="mensaje" cols="50" rows="10">Hola Mriya, estoy interesada en algunos de tus accesorios!</textarea>
-            <input type="submit" value="Consultar">
+          <form onsubmit="return validar()" novalidate>
+            <div class="form-grupo">
+              <input type="text" name="nombre" id="nombre" required placeholder=" "/>
+              <label for="nombre">Nombre</label>
+            </div>
+            <div class="form-grupo">
+              <input type="text" name="correo" id="correo" required placeholder=" "/>
+              <label for="correo">Correo electrónico</label>
+            </div>
+            <div class="form-grupo">
+              <input type="text" name="celular" id="celular" required placeholder=" "/>
+              <label for="celular">Celular (Opcional)</label>
+            </div>
+            <div class="form-grupo">
+              <textarea type="text" name="mensaje" id="mensaje" cols="50" rows="10" required placeholder=" ">Hola Mriya, estoy interesada en algunos de tus accesorios!</textarea>
+              <label for="mensaje">Mensaje</label>
+            </div>
+            <input id="enviar" type="submit" value="Consultar">
           </form>
         </div>
-        <div class="card">
-          <ul id="errores"></ul>
-        </div>
-        <div class="card">
-          <ul id="mensajes"></ul>
-        </div>
+        <div id="contacto" class="form-container"><span id="regresar">Volver</span></div>
+      </div>
+      
+      <div class="page-footer">
+        <a href="https://www.facebook.com"><img class="social-logo" src="./assets/imgs/pngfind.com-facebook-png-icon-262495.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com"><img class="social-logo" src="./assets/imgs/pngfind.com-instagram-icons-png-755741.png" alt="Instagram"></a>
       </div>
     </div>
-	<script>
-    function validar(){
-      let sinError = true;
-      let nombre = document.getElementById("nombre");
-      let correo = document.getElementById("correo");
-      let mensaje = document.getElementById("mensaje");
-      let ltaErrores = document.getElementById("errores");
-      let ltaMensajes = document.getElementById("mensajes");
-      ltaErrores.innerHTML = "";
-      nombre.classList.remove("error");
-      correo.classList.remove("error");
-      mensaje.classList.remove("error");
-      if (nombre.value.trim()==""){
-          let item = document.createElement("li");
-          ltaErrores.appendChild(item);
-          item.innerHTML = "Nombre invalido";
-          nombre.classList.add("error");
+
+    <script>
+      let divForm = document.getElementById("form");
+      let divContacto = document.getElementById("contacto");
+      let btnRegresar = document.querySelector("#regresar");
+      if(btnRegresar)btnRegresar.addEventListener("click", regresar);
+      function regresar() {
+        divForm.style.display = "block";
+        divContacto.style.display = "none";
+      }
+
+      function validar(){
+        let sinError = true;
+        let nombre = document.getElementById("nombre");
+        let nombre_error = document.getElementById("nombre_error");
+        let correo = document.getElementById("correo");
+        let mensaje = document.getElementById("mensaje");
+        let correoValido = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+        document.querySelectorAll(".error").forEach(el => el.remove());
+        if (nombre.value.trim()==""){
+          let item = document.createElement("span");
+          nombre.parentElement.appendChild(item);
+          item.classList.add('error');
+          item.innerHTML = "Error: el nombre es obligatorio.";
           sinError = false;
-      }
-      if (mensaje.value.trim()=="" || mensaje.value.length > 100){
-          let item = document.createElement("li");
-          ltaErrores.appendChild(item);
-          item.innerHTML = "Mensaje invalido";
-          nombre.classList.add("error");
+        }
+        if (correo.value.trim()=="" || !correoValido.test(correo.value) ){
+          let item = document.createElement("span");
+          correo.parentElement.appendChild(item);
+          item.classList.add('error');
+          item.innerHTML = "Error: el correo electrónico no es válido.";
           sinError = false;
+        }
+        if (mensaje.value.trim()=="" || mensaje.value.length > 100){
+          let item = document.createElement("span");
+          mensaje.parentElement.appendChild(item);
+          item.classList.add('error');
+          item.innerHTML = "Error: el mensaje no es válido.";
+          sinError = false;
+        }
+        if(sinError){
+          let item = document.createElement("p");
+          divContacto.appendChild(item);
+          item.innerHTML = "Hola "+nombre.value+"!! Recibimos tu mensaje que dice: <br> <b>"+mensaje.value+"</b> <br> Nos vamos a poner en contacto al siguiente correo "+correo.value+".<br>Opcionalmente si dejaste tu número de celular te vamos a mandar un mensaje via Whatsapp.";
+          divContacto.style.display = "block";
+          divForm.style.display = "none";
+          nombre.value = "";
+          correo.value = "";
+          mensaje.value = "Hola Mriya, estoy interesada en algunos de tus accesorios!";
+        }
+        return false;
       }
-      if(sinError){
-          let item = document.createElement("li");
-          ltaMensajes.appendChild(item);
-          item.innerHTML = nombre.value+" <b>dice: </>"+mensaje.value;
-          mensaje.value = "";
-          mensaje.focus();
-      }
-      return false;
-    }
-  </script>
+    </script>
   </body>
 </html>

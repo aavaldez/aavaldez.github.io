@@ -1,6 +1,10 @@
+/* PAGINA Y CONTENEDORES */
 html, body {
-  margin:0;
-  height:100%;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #e8e6e7;
 }
 
 .bg-container {
@@ -10,46 +14,345 @@ html, body {
   background-image: url("../imgs/banner.jpg");
   background-size:cover;
   box-sizing:border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-#car-izquierda, #car-derecha{
-  cursor: pointer;
+.page-header{
+  display: inline-flex;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
-.chevron::before {
-	border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
-	content: '';
-	display: inline-block;
-	height: 0.45em;
-	left: 0.15em;
-	position: relative;
-	top: 0.15em;
-	transform: rotate(-45deg);
-	vertical-align: top;
-	width: 0.45em;
+.page-footer {
+  margin-left: 50px;
+  margin-bottom: 25px;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
-.chevron.right:before {
-	left: 0;
-	transform: rotate(45deg);
+.page-body {
+  flex-grow: 1;
 }
 
-.chevron.left:before {
-	left: 0.25em;
-	transform: rotate(-135deg);
+.social-logo{
+  width: 25px;
+  height: 25px;
 }
 
-.cards {
-
+/* INFO */ 
+.intro{
+  width: 550px;
+  margin-left: 50px;
 }
 
-.card {
-  position: sticky;
-  top: 0;
+.intro p{
+  line-height: 25px;
+  font-size: 18px;
+}
+
+
+.destacado{
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+
+/* CARRUSEL */
+.carrusel-container{
   background: white;
   padding: 1.5rem;
   box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.15);
   border-radius: 4px;
-  width: 500px;
+  width: 600px;
+  height: 300px;
+  position: relative;
+  left: 50px;
+}
+
+.carrusel-container img{
+  float: right;
+  width: 250px;
+  height: 250px;
+  margin-right: -45px;
+}
+
+.carrusel-container p{
+  text-align: justify;
+  width: 330px;
+  padding-left: 10px;
+  line-height: 25px;
+}
+
+.chevron::before {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  height: 2.45em;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  cursor: pointer;
+  width: 2.45em;
+}
+
+.chevron.left:before {
+  left: -2em;
+  top: 40%;
+  transform: rotate(-135deg);
+  float: left;
+}
+
+.chevron.right:before {
+  left: 2em;
+  top: 40%;
+  transform: rotate(45deg);
+  float: right;
+}
+
+/* Formuario de contacto */ 
+.form-container{
+  background: white;
+  padding: 1.5rem;
+  box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  width: 550px;
+  height: 530px;
+  position: relative;
+  left: 50px;
+  top: 0px;
+}
+
+.form-grupo{
+	margin-bottom: 25px;
+  min-height: 61px;
+}
+
+.form-container h2{
+	margin: 0 0 25px;
+	padding: 0;
+	color: #222;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.form-container input{
+	padding: 13px 0;
+	margin-bottom: 0px;
+}
+
+.form-container #enviar{
+  margin-top: 15px;
+}
+
+.form-container textarea{
+	height: 80px;
+	padding: 10px 0;
+	margin-bottom: 40px;
+}
+
+.form-container input, .form-container textarea {
+	width: 100%;
+	box-sizing: border-box;
+	box-shadow: none;
+	outline: none;
+	border: none;
+	border-bottom: 2px solid #999;
+}
+
+.form-container textarea{	
+	margin-bottom: 0px;
+}
+
+.form-container input[type="submit"]{
+  font-size: 1.1em;
+	border-bottom: none;
+	cursor: pointer;
+  background: #000;
+	color: #FFF;
+	margin-bottom: 0;
+	text-transform: uppercase;
+}
+
+.form-container form div{
+	position: relative;
+}
+
+.form-container form div label {
+	position: absolute;
+	top: 10px;
+	left: 0;
+	color: #999;
+	pointer-events: none;
+	transition: .5s;
+}
+
+.form-container input:focus ~ label, .form-container textarea:focus ~ label, 
+.form-container input:valid ~ label, .form-container textarea:valid ~ label {
+	top: -12px;
+	left: 0;
+  color: #000;
+	font-size: 1em;
+	font-weight: bold;
+  
+}
+
+.form-container input:focus ~ label, .form-container textarea:focus ~ label, 
+.form-container input:valid, .form-container textarea:valid {
+  border-bottom: 2px solid #000;
+}
+
+.form-container textarea {
+  resize: none;
+}
+
+.error{
+  float: left;
+  font-size: 10px;
+  color: red;
+
+}
+
+#contacto {
+  display:none;
+}
+
+#contacto p{
+  line-height: 30px;
+}
+
+#regresar{
+	width: 100%;
+	box-sizing: border-box;
+	box-shadow: none;
+	outline: none;
+	border: none;
+	border-bottom: 2px solid #999;  
+  font-size: 1.1em;
+	border-bottom: none;
+	cursor: pointer;
+  background: #000;
+	color: #FFF;
+	margin-bottom: 0;
+	text-transform: uppercase;
+}
+
+/* MENU EN PAGINA PRINCIPAL */
+.menu li{
+  list-style: none;
+  padding: 10px;
+}
+
+.menu li a{
+  text-decoration: none;
+  font: 22px black;
+  cursor: pointer;
+}
+
+.menu li a:visited{
+  color: black;
+}
+
+/* MENU EN PAGINAS DISTINTA A LA PRINCIPAL */
+.menu-logo li{
+  list-style: none;
+  float:left;
+  padding:5px 10px;
+  text-align:center;
+  color: black;
+ }
+
+ .menu-logo li a{
+  text-decoration: none;
+  font: 22px black;
+  cursor: pointer;
+}
+
+.menu-logo li a:visited{
+  color: black;
+}
+
+/* LISTA DE PRODUCTOS */
+.producto-container{
+  background: white;
+  padding: 0.5rem;
+  box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  width: 600px;
+  height: 110px;
+  position: relative;
+  left: 50px;
+  margin-bottom: 15px;
+}
+
+.producto-container img{
+  float: right;
+  width: 100px;
+  height: 100px;
+  margin-right: 0px;
+}
+
+.producto-container h2{
+  text-align: left;
+  margin-left: 25px;
+}
+
+.producto-container h3{
+  text-align: left;
+  margin: 0px;
+}
+
+.producto-container p{
+  text-align: justify;
+  width: 450px;
+  padding-left: 10px;
+  line-height: 25px;
+}
+
+/* VISTA DE PRODUCTO */
+.prod-descripcion-container{
+  background: white;
+  padding: 0.5rem;
+  box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  width: 600px;
+  height: 550px;
+  position: relative;
+  left: 50px;
+  margin-bottom: 15px;
+}
+
+.prod-descripcion-container img{
+  float: right;
+  width: 400px;
+  height: 400px;
+  margin-right: 50px;
+}
+
+.prod-descripcion-container li{
+  list-style:none;
+  cursor: pointer;
+}
+
+.prod-descripcion-container li>img{
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.prod-descripcion-container h2{
+  text-align: left;
+  margin-left: 25px;
+}
+
+.prod-descripcion-container h3{
+  text-align: left;
+  margin: 0px;
+}
+
+.prod-descripcion-container p{
+  text-align: justify;
+  width: 450px;
+  padding-left: 10px;
+  line-height: 25px;
 }
